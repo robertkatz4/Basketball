@@ -1,8 +1,11 @@
+#python2
+# I added a way to intentionally quit the game, rather than having to break the game
+#this is part of me learning python - thanks for letting me borrow
 import random
 
 print ("Welcome to the game!")
-print("Background information: If you want to shoot Press 1. Then choose the strength of the shot you want to shoot. Your shooting strength is a percentage."
-      "Or you can press 2 to pass the ball to your teammate")
+print("Background information: If you want to shoot Press 1. Then choose the strength of the shot you want to shoot. Your shooting strength is a percentage. "
+      "Or you can press 2 to pass the ball to your teammate.\nType 'q' at any tiem to quit.")
 print ("\nIt's time for tip-off!")
 
 possession = 10
@@ -10,61 +13,65 @@ score = 0
 
 while possession > 0:
     print("\nIt's a new possession.")
-    distance = random.randint(1,24)
+    distance = random.randint(1,24) # if distance is 21 - 24 something happens before you pass/shoot
     if distance == 21:
         print("You were fouled and MADE 1 out of 2 FREE THROWS.")
         possession -= 1
         score += 1
-        print('SCORE: ',score, "-")
+        print"SCORE: ",score, "-\n"
 
     elif distance == 22:
         print("You were fouled and MADE 2 out of 2 FREE THROWS.")
         possession -= 1
         score += 2
-        print('SCORE: ',score, "-")
+        print'SCORE:',score, "-",
     elif distance == 23:
         print("You were fouled and MISSED 2 free throws.")
         possession -= 1
         score += 0
-        print('SCORE: ',score, "-")
+        print'SCORE:',score, "-",
     elif distance == 24:
         print("\nOops, the ball was STOLEN from you.")
         possession -= 1
         score += 0
-        print('SCORE: ',score, "-\n")
+        print'SCORE:',score, "-",
     else:
-        pass
-    print("\nYour team has the ball. You are", distance, "feet away from the hoop.")       
-    choose = input("What do you want to do? Press 1 to shoot or Press 2 to Pass: ")
-    if choose == '1':
-        strength = eval(input("\nWhat strength do you want to shoot it? "))
+        pass #ends the if statement
+    print "\nYour team has the ball. You are", distance, "feet away from the hoop."
+    choose = raw_input("What do you want to do? Press 1 to shoot or Press 2 to Pass, 'q' to quit: ")
+
+    if choose == 'q':
+        quit()
+
+    elif choose == "1":
+        strength = int(raw_input("\nWhat strength do you want to shoot it? "))
         distance2 = distance * 5
         if strength == distance2 and distance < 18:
             print("SWISH! You MADE the shot!")
             possession -= 1
             score += 2
-            print('SCORE: ',score, "-")
+            print"SCORE: ",score, "-"
         elif strength == distance2 - 2 or strength == distance2 + 2 or strength == distance2 + 1 or strength == distance2 - 1 or strength == distance2 + 3 or strength == distance2 - 3:
             print("\nYou banked in the shot. Lucky shot..\n")
             possession -= 1
             score += 2
-            print('SCORE: ',score, "-")
+            print"SCORE: ",score, "-"
         elif strength == distance2 and distance > 17:
             print("SWISH! You made a 3 point shot!")
             possession -= 1
             score += 3
-            print('SCORE: ',score, "-")
+            print"SCORE: ",score, "-"
         elif strength == distance2 - 2 or strength == distance2 + 2 or strength == distance2 + 1 or strength == distance2 - 1 or strength == distance2 + 3 or strength == distance2 - 3:
             print("\nYou banked in the shot. Lucky shot..\n")
             possession -= 1
             score += 3
-            print('SCORE: ',score, "-")
+            print"SCORE: ",score, "-"
         else:
             print("You missed the shot.")
             possession -= 1
-            print('SCORE:',score, "-\n", )
+            print"SCORE:",score, "-\n",
 
-    elif choose == '2':
+    elif choose == "2":
         print("\nYou passed the ball to a teammate.\n")
         passed = random.randint(1,10)
 
@@ -98,12 +105,12 @@ while possession > 0:
             possession -= 1
         else:
             pass
-        print('SCORE:',score, "-", )
+        print"SCORE:",score, "-",
     else:
         print("\nYour team TURNED the ball OVER.")
         possession -= 1
-        print('SCORE:',score, "-", )
+        print"SCORE:",score, "-",
 
 
 print("End of the quarter.")
-print("SCORE: ", score, "-")
+print"SCORE: ", score, "-"
